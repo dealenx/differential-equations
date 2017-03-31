@@ -7,9 +7,10 @@
 
 #include "targetver.h"
 
+#include <iostream>
 #include <stdio.h>
 #include <tchar.h>
-
+#include <math.h>
 
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
