@@ -1,12 +1,7 @@
-// differential-equations.cpp: определяет точку входа для консольного приложения.
-//
+#include "file.h"
 
-#include "stdafx.h"
-
-
-int main() {
+void main() {
 	double a, b, n, h;
-	
 
 	printf("Enter a,b, n: ");
 	scanf_s("%lf %lf %lf",&a, &b, &n);
@@ -20,9 +15,5 @@ int main() {
 		printf("x[%d]=%lf ",i,x[i]);
 	}
 
-	
-
-	
-	return 0;
 }
 
