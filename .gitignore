@@ -7,8 +7,8 @@
 *.layout
 /bin/
 /obj/
-/Debug/
-
+/x64/
+/differential-equations/x64/
 /wp-content/upgrade
 /wp-content/uploads
 /wp-content/index.php
