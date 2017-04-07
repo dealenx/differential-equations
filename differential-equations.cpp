@@ -27,8 +27,8 @@ void main() {
 
 	double *y = new double[n + 1];
 	
-	y[0] = ((PI)*(PI)*sin(PI * 0)) * (-1);
-	y[4] = ((PI)*(PI)*sin(PI * 1)) * (-1);
+	y[0] = 0;
+	y[4] = 0;
 
 	printf("\n y0 = %lf y4 = %lf \n", y[0], y[4]);
 	printf("\n");
@@ -41,7 +41,7 @@ void main() {
 
 	for (int i = 0; i < N; i++) {
 		printf("f[%d] = %lf ", i, f[i]);
-	} printf("\n");
+	} printf("\n\n");
 
 	double** A = new double*[N];
 	for (int i = 0; i < N; i++)
@@ -53,6 +53,7 @@ void main() {
 	A[1][0] = 1; A[1][1] = -2; A[1][2] = 1; A[1][3] = f[1];
 	A[2][0] = 0; A[2][1] = 1; A[2][2] = -2; A[2][3] = f[2];
 
+	printf("Matrix A: \n");
 	OutputDescMatr(A, N, M);
 
 	double *xx = new double[3];
@@ -60,7 +61,17 @@ void main() {
 	Solve(A, xx, N);
 
 	for (int i = 0; i < N; i++) {
-		printf("%lf ", xx[i]);
+		y[i + 1] = xx[i];
+	} 
+
+	double *yt = new double[n+2];
+
+	for (int i = 0; i < n+2; i++) {
+		yt[i] = sin(PI*x[i]);
+	}
+
+	for (int i = 0; i < N+2; i++) {
+		printf("y[%d] = %lf, yt[%d] = %lf, y[%d] - yt[%d] = %lf \n", i, y[i], i, yt[i], i, i, abs(y[i] - yt[i]));
 	} printf("\n");
 
 	delete[] xx; xx = NULL;	for (int j = 0; j <= N - 1; j++)
