@@ -13,4 +13,9 @@
 #include <math.h>
 
 
-// TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
+// TODO: 
+
+void triangMatr(double** A, double **B, int N);
+void Solve(double **A, double *x, int N);
+void InputDescMatr(double** M, int n, int m);
+void OutputDescMatr(double** M, int n, int m);
