@@ -47,24 +47,53 @@ void Solve(double **A, double *x, int N)
 	delete[]B;
 }
 
-void InputDescMatr(double** M, int n, int m)
-{ // function for input matrix on screen
-	int i, j;
-	printf("\n Please enter the matrix %d x %d\n", n, m);
-	for (i = 0; i<n; i++)
-		for (j = 0; j<m; j++)
-			scanf_s("%lf", &M[i][j]);
-	printf("\n\n");
-}
-
 void OutputDescMatr(double** M, int n, int m)
 { // function for output matrix on screen
 	int i, j;
 	for (i = 0; i<n; i++)
 	{
 		for (j = 0; j<m; j++)
-			printf("%lf ", M[i][j]);
+			printf("%g ", M[i][j]);
 		printf("\n");
 	}
 	printf("\n\n");
+}
+
+void FillMatrix( /* Заполнение матрицы */ 
+	double **M, //Матрица
+	double *y, //Чтобы знать границы
+	double *f, //Чтобы значить f(i)
+	double h, // Шаг
+	int N
+	)
+{
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < N; j++)
+		{
+			
+			
+			if ( i == j )
+			{
+				M[i][j] = -2 / (h*h);
+			}
+			else if (j == i + 1)
+			{
+				M[i][j] = 1 / (h*h);
+			}
+			else if (i == j + 1)
+			{
+				M[i][j] = 1 / (h*h);
+			}
+			else {
+				M[i][j] = 0;
+			}
+			
+		}
+	}
+	
+	for (int i = 0; i < N; i++)
+	{
+		M[i][N] = f[i];
+	}
 }

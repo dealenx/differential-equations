@@ -3,44 +3,71 @@
 using namespace std;
 
 void main() {
-	const double PI = atan(1.0) * 4;
+	setlocale(LC_CTYPE, "rus");
+	const double PI = atan(1.0) * 4; //Число Pi
 	//y = sin(PI*x)
 	//y'' = (-1)*(PI)*(PI)*sin(PI*x)
-
-	const int N = 3, M = 4;
 	
-	double a, b, n, h;
+	double a; // Левая граница
+	double b; // Правая граница
+	int n; // Количество всех точек, включая границы
+	double h; // Шаг
+	int s; // Количество отрезков
+	int k; // Количество точек, помимо границ
 
-	printf("Enter a,b, n: ");
-	scanf_s("%lf %lf %lf",&a, &b, &n);
-	h = (b - a) / (n + 1);
-	printf("a=%lf, b=%lf, n=%lf, h=%lf \n", a, b, n, h);
+	printf("y'' = ((-1)*(PI)^2)*sin(PI*x) \n");
+
+	printf("Введите границы [a;b] в формале 'a b': ");
+	scanf_s("%lf %lf",&a, &b);
+
+	printf("Введите количество отрезков: ");
+	scanf_s("%d", &s);
+	n = s + 1;
+	k = s - 1;
+	h = (b - a) / s;
+
+	double *y = new double[n];
+
 	printf("\n");
+	
+	printf("Введите y(%g): ",a);
+	scanf_s("%lf", &y[0]);
 
-	double *x = new double[n + 1];
+	printf("Введите y(%g): ", b);
+	scanf_s("%lf", &y[s]);
 
-	for (int i = 0; i <= (n + 1); i++) {
+	printf("H  = %lf", h);
+
+	const int N = k, M = s; // Размерность матрицы
+
+	double *x = new double[n];
+
+	for (int i = 0; i < n; i++) 
+	{
 		x[i] = a + (i*h);
-		printf("x[%d]=%lf ",i,x[i]);
+		printf("x[%d]=%g ",i,x[i]);
 	}
 	printf("\n");
 
-	double *y = new double[n + 1];
-	
-	y[0] = 0;
-	y[4] = 0;
+	double *f = new double[s];
 
-	printf("\n y0 = %lf y4 = %lf \n", y[0], y[4]);
-	printf("\n");
-
-	double *f = new double[n];
-
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) 
+	{
 		f[i] = ((PI)*(PI)*sin(PI * x[i+1]  )) * (-1);
+
+		if (i == 0)
+		{
+			f[i] = f[i] - y[0];
+		}
+		if (i == n - 1)
+		{
+			f[i] = f[i] - y[s];
+		}
 	}
 
-	for (int i = 0; i < N; i++) {
-		printf("f[%d] = %lf ", i, f[i]);
+	for (int i = 0; i < N; i++) 
+	{
+		printf("f[%d] = %g ", i, f[i]);
 	} printf("\n\n");
 
 	double** A = new double*[N];
@@ -49,37 +76,38 @@ void main() {
 		A[i] = new double[M];
 	}
 
-	A[0][0] = -2; A[0][1] = 1; A[0][2] = 0; A[0][3] = f[0];
-	A[1][0] = 1; A[1][1] = -2; A[1][2] = 1; A[1][3] = f[1];
-	A[2][0] = 0; A[2][1] = 1; A[2][2] = -2; A[2][3] = f[2];
+	FillMatrix(A,y,f,h,N);
 
 	printf("Matrix A: \n");
 	OutputDescMatr(A, N, M);
 
-	double *xx = new double[3];
+	double *xx = new double[k];
 
 	Solve(A, xx, N);
 
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++) 
+	{
 		y[i + 1] = xx[i];
 	} 
+	
+	// Вычисление теоритическое 'y'
+	double *yt = new double[n];
 
-	double *yt = new double[n+2];
-
-	for (int i = 0; i < n+2; i++) {
+	for (int i = 0; i < n; i++) 
+	{
 		yt[i] = sin(PI*x[i]);
 	}
 
-	for (int i = 0; i < N+2; i++) {
+	for (int i = 0; i < n; i++) 
+	{
 		printf("y[%d] = %lf, yt[%d] = %lf, y[%d] - yt[%d] = %lf \n", i, y[i], i, yt[i], i, i, abs(y[i] - yt[i]));
 	} printf("\n");
 
-	delete[] xx; xx = NULL;	for (int j = 0; j <= N - 1; j++)
+	delete[] xx; xx = NULL;
+	for (int j = 0; j <= N - 1; j++)
 	{
 		delete[] A[j];
 	}
 	delete[] A;
 	A = NULL;
-
-
 }
