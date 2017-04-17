@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="general\general.cpp">
+      <Filter>general</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="general">
+      <UniqueIdentifier>{fe295f86-fb47-4ee3-ac79-e0063bb1a822}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="general\general.h">
+      <Filter>general</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
