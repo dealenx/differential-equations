@@ -1,8 +1,4 @@
-// stdafx.cpp: исходный файл, содержащий только стандартные включаемые модули
-// differential-equations.pch будет предкомпилированным заголовком
-// stdafx.obj будет содержать предварительно откомпилированные сведения о типе
-
-#include "stdafx.h"
+п»ї#include "../general/general.h"
 
 // TODO:
 
@@ -59,21 +55,21 @@ void OutputDescMatr(double** M, int n, int m)
 	printf("\n\n");
 }
 
-void FillMatrix( /* Заполнение матрицы */ 
-	double **M, //Матрица
-	double *y, //Чтобы знать границы
-	double *f, //Чтобы значить f(i)
-	double h, // Шаг
+void FillMatrix( /* Г‡Г ГЇГ®Г«Г­ГҐГ­ГЁГҐ Г¬Г ГІГ°ГЁГ¶Г» */
+	double **M, //ГЊГ ГІГ°ГЁГ¶Г 
+	double *y, //Г—ГІГ®ГЎГ» Г§Г­Г ГІГј ГЈГ°Г Г­ГЁГ¶Г»
+	double *f, //Г—ГІГ®ГЎГ» Г§Г­Г Г·ГЁГІГј f(i)
+	double h, // ГГ ГЈ
 	int N
-	)
+)
 {
 	for (int i = 0; i < N; i++)
 	{
 		for (int j = 0; j < N; j++)
 		{
-			
-			
-			if ( i == j )
+
+
+			if (i == j)
 			{
 				M[i][j] = -2 / (h*h);
 			}
@@ -88,10 +84,10 @@ void FillMatrix( /* Заполнение матрицы */
 			else {
 				M[i][j] = 0;
 			}
-			
+
 		}
 	}
-	
+
 	for (int i = 0; i < N; i++)
 	{
 		M[i][N] = f[i];
