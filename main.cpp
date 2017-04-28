@@ -24,8 +24,8 @@ void main() {
 	scanf_s("%lf %lf", &a, &b);
 
 	printf("\n");
-
-	printf("Введите y(%g): ", a);
+	 
+	printf("Введите y(%g): ", a);//ФЫ
 	scanf_s("%lf", &yFirst);
 
 	printf("Введите y(%g): ", b);
