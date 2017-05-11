@@ -185,7 +185,7 @@ void GeneralFunc
 
 	for (int i = 0; i < n; i++)
 	{
-		yDelta[i] = abs(y[i] - yTheoretical[i]);
+		yDelta[i] = abs(abs(y[i]) - abs(yTheoretical[i]));
 	}
 
 	printf("\n Шаг: %lf , Дельта 'y' максимальное: %lf \n", h, MaxVector(yDelta, n));
