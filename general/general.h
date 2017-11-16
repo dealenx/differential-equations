@@ -6,6 +6,8 @@
 #include <math.h>
 #include <clocale>
 
+using namespace std;
+
 
 // TODO: 
 
